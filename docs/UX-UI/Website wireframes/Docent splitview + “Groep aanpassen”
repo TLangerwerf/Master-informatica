@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Docent – Splitview + Groep aanpassen</title>
+
+  <link rel="stylesheet" href="ui.css">
+
+  <!-- Alleen splitview + edit-pane styling (geen duplicaten van ui.css) -->
+  <style>
+    .split{
+      display:grid;
+      grid-template-columns: 320px 1fr;
+      gap: 16px;
+      margin-top: 16px;
+      align-items: start;
+    }
+    .split > *{ min-width:0; }
+    @media (max-width: 920px){ .split{ grid-template-columns: 1fr; } }
+
+    .list{ display:grid; gap: 10px; }
+    .row{
+      display:grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items:center;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      background: var(--surface);
+      box-shadow: 0 8px 20px rgba(37,48,71,0.05);
+      cursor: pointer;
+    }
+    .row:hover{
+      border-color: color-mix(in srgb, var(--border) 60%, var(--accent) 40%);
+    }
+    .row.active{
+      border-color: color-mix(in srgb, var(--accent) 55%, var(--border) 45%);
+      background: color-mix(in srgb, var(--accent-soft) 35%, var(--surface) 65%);
+    }
+    .name{ font-weight: 800; }
+    .sub{ font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    .table-wrap{
+      max-height: 520px;
+      overflow:auto;
+      border-radius: var(--r);
+    }
+    .table{
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+    .table th, .table td{
+      text-align:left;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      font-size: 13px;
+    }
+    .table th{
+      font-size: 12px;
+      color: var(--muted);
+      background: var(--surface-2);
+    }
+    .table tr:last-child td{ border-bottom:none; }
+    .score{ white-space:nowrap; font-weight:800; }
+    .date{ white-space:nowrap; color:var(--muted); font-size:12px; }
+
+    /* --- Edit pane (in dezelfde rechterkolom) --- */
+    .right-head{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:flex-end;
+      flex-wrap:wrap;
+    }
+    .inline-actions{ display:flex; gap:10px; flex-wrap:wrap; }
+    .btn.sm{ padding:6px 10px; border-radius:10px; }
+
+    .edit-pane{
+      margin-top: 12px;
+      border: 1px dashed color-mix(in srgb, var(--border) 70%, var(--accent) 30%);
+      background: color-mix(in srgb, var(--accent-soft) 25%, var(--bg) 75%);
+      border-radius: var(--r);
+      padding: 12px;
+    }
+    .edit-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    @media (max-width: 720px){ .edit-grid{ grid-template-columns: 1fr; } }
+
+    .field label{ margin-top:0; }
+    .hint{ font-size:12px; color:var(--muted); margin-top:6px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo">WRP</div>
+      <div>
+        <div>Website Review Platform</div>
+        <div class="muted">Docent</div>
+      </div>
+    </div>
+    <div class="actions">
+      <span class="pill info">Klas: INF2A</span>
+      <button class="btn">Uitloggen</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section class="panel">
+    <div class="title">Reviews per leerling</div>
+    <p class="muted">Links selecteer je een leerling. Rechts zie je direct de reviews + mogelijkheid om een groep/website aan te passen.</p>
+    <nav class="nav">
+      <a class="btn" href="#">Websites</a>
+      <a class="btn primary" href="#" aria-current="page">Reviews per leerling</a>
+    </nav>
+  </section>
+
+  <div class="split">
+
+    <!-- LEFT: leerlingen -->
+    <aside class="panel" aria-label="Leerlingenlijst">
+      <div class="title" style="font-size:14px">Leerlingen</div>
+      <p class="muted">Selecteer een leerling.</p>
+
+      <div class="list">
+        <div class="row active" aria-current="true">
+          <div>
+            <div class="name">Stefan Jansen</div>
+            <div class="sub">3 reviews geplaatst</div>
+          </div>
+          <span class="pill good">3</span>
+        </div>
+
+        <div class="row">
+          <div>
+            <div class="name">Lisa de Vries</div>
+            <div class="sub">Nog geen feedback</div>
+          </div>
+          <span class="pill warn">0</span>
+        </div>
+
+        <div class="row">
+          <div>
+            <div class="name">Ahmed El Amrani</div>
+            <div class="sub">2 reviews geplaatst</div>
+          </div>
+          <span class="pill good">2</span>
+        </div>
+      </div>
+
+      <div class="hr"></div>
+      <div class="notice">Tip: let op concreetheid, onderbouwing en toon.</div>
+    </aside>
+
+    <!-- RIGHT: reviews + edit -->
+    <main class="panel" aria-label="Reviews en groep aanpassen">
+
+      <div class="right-head">
+        <div>
+          <div class="title" style="font-size:14px">Feedback – Stefan Jansen</div>
+          <div class="muted">Klik op een review-rij om details te zien (later). Hieronder kun je ook groepsgegevens aanpassen.</div>
+        </div>
+
+        <div class="inline-actions">
+          <button class="btn sm">Groep aanpassen</button>
+          <span class="pill info">Totaal reviews: 3</span>
+        </div>
+      </div>
+
+      <div class="hr"></div>
+
+      <div class="table-wrap">
+        <table class="table" aria-label="Review tabel">
+          <thead>
+            <tr>
+              <th style="width:28%">Website</th>
+              <th style="width:10%">Score</th>
+              <th>Toelichting</th>
+              <th style="width:14%">Datum</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Portfolio – Groep 1</strong></td>
+              <td class="score">4/5</td>
+              <td>Duidelijke structuur en navigatie. Typografie kan consistenter.</td>
+              <td class="date">2025-12-29</td>
+            </tr>
+            <tr>
+              <td><strong>Webshop – Groep 2</strong></td>
+              <td class="score">3/5</td>
+              <td>Layout schuift op mobiel. Let op contrasten en spacing.</td>
+              <td class="date">2025-12-28</td>
+            </tr>
+            <tr>
+              <td><strong>Nieuwswebsite – Groep 3</strong></td>
+              <td class="score">5/5</td>
+              <td>Overzichtelijk. Sterke headings en logische opbouw.</td>
+              <td class="date">2025-12-27</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Edit pane (mockup: standaard zichtbaar; later toggle met JS) -->
+      <section class="edit-pane" aria-label="Groep/website aanpassen">
+        <div class="title" style="font-size:14px">Groep/website aanpassen</div>
+        <div class="muted">Pas gegevens aan voor een geselecteerde groep/website (bijv. titel, URL of groepsnaam).</div>
+
+        <div class="edit-grid">
+          <div class="field">
+            <label class="muted" for="groep">Groep</label>
+            <input id="groep" type="text" value="Groep 1" />
+          </div>
+
+          <div class="field">
+            <label class="muted" for="klas">Klas</label>
+            <input id="klas" type="text" value="INF2A" />
+          </div>
+
+          <div class="field" style="grid-column: 1 / -1;">
+            <label class="muted" for="titel">Website titel</label>
+            <input id="titel" type="text" value="Portfolio – Groep 1" />
+          </div>
+
+          <div class="field" style="grid-column: 1 / -1;">
+            <label class="muted" for="url">URL</label>
+            <input id="url" type="url" value="https://voorbeeldsite.nl" />
+            <div class="hint">Tip: valideer URL later in de backend + basischeck in de UI.</div>
+          </div>
+        </div>
+
+        <div class="nav" style="margin-top:12px">
+          <button class="btn primary">Opslaan</button>
+          <button class="btn">Annuleren</button>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<footer>Docenteninterface – splitview + groep aanpassen (UI mockup)</footer>
+</body>
+</html>

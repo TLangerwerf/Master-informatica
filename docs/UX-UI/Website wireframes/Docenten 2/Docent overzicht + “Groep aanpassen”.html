@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Docent – Websites overzicht</title>
+
+  <link rel="stylesheet" href="ui.css">
+
+  <style>
+    /* Split view */
+    .split{
+      display:grid;
+      grid-template-columns: 360px 1fr;
+      gap: 16px;
+      margin-top: 16px;
+      align-items: start;
+    }
+    .split > *{ min-width:0; }
+    @media (max-width: 920px){ .split{ grid-template-columns: 1fr; } }
+
+    /* Left list */
+    .list{ display:grid; gap: 10px; }
+    .row{
+      display:grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items:center;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      background: var(--surface);
+      box-shadow: 0 8px 20px rgba(37,48,71,0.05);
+      cursor: pointer;
+    }
+    .row:hover{ border-color: color-mix(in srgb, var(--border) 60%, var(--accent) 40%); }
+    .row.active{
+      border-color: color-mix(in srgb, var(--accent) 55%, var(--border) 45%);
+      background: color-mix(in srgb, var(--accent-soft) 35%, var(--surface) 65%);
+    }
+    .name{ font-weight: 800; }
+    .sub{ font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    /* Right details */
+    .right-head{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:flex-end;
+      flex-wrap:wrap;
+    }
+    .inline-actions{ display:flex; gap:10px; flex-wrap:wrap; }
+    .btn.sm{ padding:6px 10px; border-radius:10px; }
+
+    .kv{
+      display:grid;
+      grid-template-columns: 140px 1fr;
+      gap: 8px 12px;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      background: color-mix(in srgb, var(--surface-2) 45%, white 55%);
+    }
+    .kv div{ font-size: 13px; }
+    .kv .k{ color: var(--muted); }
+
+    /* Edit pane */
+    .edit-pane{
+      margin-top: 12px;
+      border: 1px dashed color-mix(in srgb, var(--border) 70%, var(--accent) 30%);
+      background: color-mix(in srgb, var(--accent-soft) 25%, var(--bg) 75%);
+      border-radius: var(--r);
+      padding: 12px;
+    }
+    .edit-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    @media (max-width: 720px){ .edit-grid{ grid-template-columns: 1fr; } }
+
+    .hint{ font-size:12px; color:var(--muted); margin-top:6px; }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo">WRP</div>
+      <div>
+        <div>Website Review Platform</div>
+        <div class="muted">Docent</div>
+      </div>
+    </div>
+    <div class="actions">
+      <span class="pill info">Klas: INF2A</span>
+      <button class="btn">Uitloggen</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- Intro + navigatie -->
+  <section class="panel">
+    <div class="title">Websites overzicht</div>
+    <p class="muted">
+      Selecteer links een website/groep. Rechts kun je details bekijken en (indien nodig) de groep/website aanpassen.
+    </p>
+
+    <nav class="nav">
+      <a class="btn primary" href="#" aria-current="page">Websites</a>
+      <a class="btn" href="docent-reviews-split.html">Reviews per leerling</a>
+    </nav>
+  </section>
+
+  <div class="split">
+
+    <!-- LEFT: websites list -->
+    <aside class="panel" aria-label="Websites lijst">
+      <div class="title" style="font-size:14px">Websites (klas INF2A)</div>
+      <p class="muted">Klik een website aan om details te bekijken.</p>
+
+      <div class="list">
+        <div class="row active" aria-current="true">
+          <div>
+            <div class="name">Portfolio – Groep 1</div>
+            <div class="sub">URL: voorbeeldsite.nl</div>
+          </div>
+          <span class="pill good">4</span>
+        </div>
+
+        <div class="row">
+          <div>
+            <div class="name">Webshop concept – Groep 2</div>
+            <div class="sub">URL: webshopvoorbeeld.nl</div>
+          </div>
+          <span class="pill warn">1</span>
+        </div>
+
+        <div class="row">
+          <div>
+            <div class="name">Nieuwswebsite – Groep 3</div>
+            <div class="sub">URL: nieuwsvoorbeeld.nl</div>
+          </div>
+          <span class="pill warn">0</span>
+        </div>
+      </div>
+
+      <div class="hr"></div>
+      <div class="notice">Badge = aantal ontvangen reviews per website.</div>
+    </aside>
+
+    <!-- RIGHT: website details + edit -->
+    <main class="panel" aria-label="Website details en aanpassen">
+
+      <div class="right-head">
+        <div>
+          <div class="title" style="font-size:14px">Details – Portfolio – Groep 1</div>
+          <div class="muted">Overzicht + snelle aanpassing van groepsgegevens.</div>
+        </div>
+
+        <div class="inline-actions">
+          <a class="btn sm" href="#" onclick="return false;">Open website</a>
+          <button class="btn sm">Groep aanpassen</button>
+          <span class="pill info">Reviews: 4</span>
+        </div>
+      </div>
+
+      <div class="hr"></div>
+
+      <!-- Details -->
+      <div class="kv" aria-label="Website kenmerken">
+        <div class="k">Klas</div><div>INF2A</div>
+        <div class="k">Groep</div><div>Groep 1</div>
+        <div class="k">Titel</div><div>Portfolio – Groep 1</div>
+        <div class="k">URL</div><div>https://voorbeeldsite.nl</div>
+      </div>
+
+      <!-- Edit pane (mockup: zichtbaar; later toggle met JS) -->
+      <section class="edit-pane" aria-label="Groep/website aanpassen">
+        <div class="title" style="font-size:14px">Groep/website aanpassen</div>
+        <div class="muted">Pas titel, URL of groepsnaam aan. (Later: validatie + opslaan via API.)</div>
+
+        <div class="edit-grid">
+          <div>
+            <label class="muted" for="groep">Groep</label>
+            <input id="groep" type="text" value="Groep 1">
+          </div>
+
+          <div>
+            <label class="muted" for="klas">Klas</label>
+            <input id="klas" type="text" value="INF2A">
+          </div>
+
+          <div style="grid-column:1/-1">
+            <label class="muted" for="titel">Website titel</label>
+            <input id="titel" type="text" value="Portfolio – Groep 1">
+          </div>
+
+          <div style="grid-column:1/-1">
+            <label class="muted" for="url">URL</label>
+            <input id="url" type="url" value="https://voorbeeldsite.nl">
+            <div class="hint">Tip: basischeck in UI + server-side validatie.</div>
+          </div>
+        </div>
+
+        <div class="nav" style="margin-top:12px">
+          <button class="btn primary">Opslaan</button>
+          <button class="btn">Annuleren</button>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+</div>
+
+<footer>Docenteninterface – websites overzicht + groep aanpassen (UI mockup)</footer>
+</body>
+</html>

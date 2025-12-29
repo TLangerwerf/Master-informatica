@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Docent – Websites overzicht</title>
+
+  <!-- Basisstijl (jouw rustige palette + componenten) -->
+  <link rel="stylesheet" href="ui.css" />
+
+  <style>
+    /* ===== Pagina-specifiek (geen duplicaten van ui.css) ===== */
+    .page-head{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:flex-end;
+      flex-wrap:wrap;
+    }
+    .filters{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .btn.sm{ padding:6px 10px; border-radius:10px; }
+
+    /* 8 kaarten: 2 kolommen desktop, 1 kolom mobiel (komt uit ui.css grid) */
+    .grid{ margin-top: 12px; }
+
+    /* ===== Overlay / modal ===== */
+    .overlay{
+      position: fixed;
+      inset: 0;
+      background: rgba(37,48,71,0.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      z-index: 999;
+    }
+    .overlay.open{ display:flex; }
+
+    .modal{
+      width: min(760px, 100%);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      box-shadow: 0 24px 60px rgba(37,48,71,0.25);
+      overflow: hidden;
+    }
+
+    .modal-head{
+      display:flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      padding: 14px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface-2);
+    }
+
+    .modal-body{ padding: 14px; }
+    .modal-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      padding: 14px;
+      border-top: 1px solid var(--border);
+      background: color-mix(in srgb, var(--surface-2) 55%, white 45%);
+    }
+
+    .edit-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    @media (max-width: 720px){
+      .edit-grid{ grid-template-columns: 1fr; }
+    }
+    .hint{ font-size:12px; color:var(--muted); margin-top:6px; }
+
+    /* Reviews lijst in modal */
+    .review-list{ display:grid; gap:10px; margin-top:10px; }
+    .review-item{
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 12px;
+      background: var(--surface);
+      box-shadow: 0 8px 22px rgba(37,48,71,0.05);
+    }
+    .review-meta{ display:flex; gap:10px; flex-wrap:wrap; align-items:baseline; }
+    .review-meta .score{ font-weight:800; }
+    .review-meta .date{ color:var(--muted); font-size:12px; }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo">WRP</div>
+      <div>
+        <div>Website Review Platform</div>
+        <div class="muted">Docent</div>
+      </div>
+    </div>
+    <div class="actions">
+      <span class="pill info">Klas: INF2A</span>
+      <span class="pill info">Rol: docent</span>
+      <button class="btn">Uitloggen</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section class="panel">
+    <div class="page-head">
+      <div>
+        <div class="title">Websites overzicht (8 voorbeelden)</div>
+        <div class="muted">Docent kan websites openen, reviews bekijken en gegevens aanpassen. (Mockup)</div>
+      </div>
+
+      <!-- Docent-only acties -->
+      <div class="filters" aria-label="Docent acties">
+        <a class="btn" href="#">Websites</a>
+        <a class="btn" href="docenten-splitview.html">Reviews per leerling</a>
+        
+      </div>
+    </div>
+
+    <div class="notice">
+      Ontwerpkeuze: aanpassen en reviews openen in een overlay, zodat de docent in het overzicht blijft (minder contextwissel).
+    </div>
+  </section>
+
+  <section class="panel" style="margin-top:16px" aria-label="Website kaarten">
+    <div class="title">Ingediende websites</div>
+    <div class="muted">Badge = aantal ontvangen reviews.</div>
+
+    <div class="grid">
+      <!-- 1 -->
+      <article class="card">
+        <div class="card-head">
+          <div>
+            <strong>Portfolio – Groep 1</strong>
+            <div class="meta">https://voorbeeldsite.nl • Groep 1</div>
+          </div>
+          <span class="pill good">4 reviews</span>
+        </div>
+        <div class="card-actions">
+          <a class="btn sm" href="https://voorbeeldsite.nl" target="_blank" rel="noopener">Open website</a>
+          <button class="btn sm" type="button"
+            data-open-reviews
+            data-title="Portfolio – Groep 1"
+            data-count="4">
+            Reviews
+          </button>
+          <button class="btn sm primary" type="button"
+            data-open-edit
+            data-id="1"
+            data-klas="INF2A"
+            data-groep="Groep 1"
+            data-titel="Portfolio – Groep 1"
+            data-url="https://voorbeeldsite.nl">
+            Aanpassen
+          </button>
+        </div>
+      </article>
+
+      <!-- 2 -->
+      <article class="card">
+        <div class="card-head">
+          <div>
+            <strong>Webshop concept – Groep 2</strong>
+            <div class="meta">https://webshopvoorbeeld.nl • Groep 2</div>
+          </div>
+          <span class="pill warn">1 review</span>
+        </div>
+        <div class="card-actions">
+          <a class="btn sm" href="https://webshopvoorbeeld.nl" target="_blank" rel="noopener">Open website</a>
+          <button class="btn sm" type="button" data-open-reviews data-title="Webshop concept – Groep 2" data-count="1">Reviews</button>
+          <button class="btn sm primary" type="button"
+            data-open-edit data-id="2" data-klas="INF2A" data-groep="Groep 2"
+            data-titel="Webshop concept – Groep 2" data-url="https://webshopvoorbeeld.nl">
+            Aanpassen
+          </button>
+        </div>
+      </article>
+
+      <!-- 3 -->
+      <article class="card">
+        <div class="card-head">
+          <div>
+            <strong>Nieuwswebsite – Groep 3</strong>
+            <div class="meta">https://nieuwsvoorbeeld.nl • Groep 3</div>
+          </div>
+          <span class="pill warn">0 reviews</span>
+        </div>
+        <div class="card-actions">
+          <a class="btn sm" href="https://nieuwsvoorbeeld.nl" target="_blank" rel="noopener">Open website</a>
+          <button class="btn sm" type="button" data-open-reviews data-title="Nieuwswebsite – Groep 3" data-count="0">Reviews</button>
+          <button class="btn sm primary" type="button"
+            data-open-edit data-id="3" data-klas="INF2A" data-groep="Groep 3"
+            data-titel="Nieuwswebsite – Groep 3" data-url="https://nieuwsvoorbeeld.nl">
+            Aanpassen
+          </button>
+        </div>
+      </article>
+
+      <!-- 4 -->
+      <article class="card">
+        <div class="card-head">
+          <div>
+            <strong>Reisblog – Groep 4</strong>
+            <div class="meta">https://reisvoorbeeld.nl • Groep 4</div>
+          </div>
+          <span class="pill good">3 reviews</span>
+        </div>
+        <div class="card-actions">
+          <a class="btn sm" href="https://reisvoorbeeld.nl" target="_blank" rel="noopener">Open website</a>
+          <button class="btn sm" type="button" data-open-reviews data-title="Reisblog – Groep 4" data-count="3">Reviews</button>
+          <button class="btn sm primary" type="button"
+            data-open-edit data-id="4" data-klas="INF2A" data-groep="Groep 4"
+            data-titel="Reisblog – Groep 4" data-url="https://reisvoorbeeld.nl">
+            Aanpassen
+          </button>
+        </div>
+      </article>
+
+      <!-- 5 -->
+      <article class="card">
+        <div class="card-head">
+          <div>
+            <strong>Landingpage – Groep 5</strong>
+            <div class="meta">https://landingvoorbeeld.nl • Groep 5</div>
+          </div>
+          <span class="pill good">2 reviews</span>
+        </div>
+        <div class="card-actions">
+          <a class="btn sm" href="https://landingvoorbeeld.nl" target="_blank" rel="noopener">Open website</a>
+          <button class="btn sm" type="button" data-open-reviews data-title="Landingpage – Groep 5" data-count="2">Reviews</button>
+          <button class="btn sm primary" type="button"
+            data-open-edit data-id="5" data-klas="INF2A" data-groep="Groep 5"
+            data-titel="Landingpage – Groep 5" data-url="https://landingvoorbeeld.nl">
+            Aanpassen
+          </button>
+        </div>
+      </article>
+
+      <!-- 6 -->
+      <article class="card">
+        <div class="card-head">
+          <div>
+            <strong>Blog – Groep 6</strong>
+            <div class="meta">https://blogvoorbeeld.nl • Groep 6</div>
+          </div>
+          <span class="pill good">5 reviews</span>
+        </div>
+        <div class="card-actions">
+          <a class="btn sm" href="https://blogvoorbeeld.nl" target="_blank" rel="noopener">Open website</a>
+          <button class="btn sm" type="button" data-open-reviews data-title="Blog – Groep 6" data-count="5">Reviews</button>
+          <button class="btn sm primary" type="button"
+            data-open-edit data-id="6" data-klas="INF2A" data-groep="Groep 6"
+            data-titel="Blog – Groep 6" data-url="https://blogvoorbeeld.nl">
+            Aanpassen
+          </button>
+        </div>
+      </article>
+
+      <!-- 7 -->
+      <article class="card">
+        <div class="card-head">
+          <div>
+            <strong>Dashboard demo – Groep 7</strong>
+            <div class="meta">https://dashboardvoorbeeld.nl • Groep 7</div>
+          </div>
+          <span class="pill warn">1 review</span>
+        </div>
+        <div class="card-actions">
+          <a class="btn sm" href="https://dashboardvoorbeeld.nl" target="_blank" rel="noopener">Open website</a>
+          <button class="btn sm" type="button" data-open-reviews data-title="Dashboard demo – Groep 7" data-count="1">Reviews</button>
+          <button class="btn sm primary" type="button"
+            data-open-edit data-id="7" data-klas="INF2A" data-groep="Groep 7"
+            data-titel="Dashboard demo – Groep 7" data-url="https://dashboardvoorbeeld.nl">
+            Aanpassen
+          </button>
+        </div>
+      </article>
+
+      <!-- 8 -->
+      <article class="card">
+        <div class="card-head">
+          <div>
+            <strong>Evenementen site – Groep 8</strong>
+            <div class="meta">https://eventvoorbeeld.nl • Groep 8</div>
+          </div>
+          <span class="pill warn">0 reviews</span>
+        </div>
+        <div class="card-actions">
+          <a class="btn sm" href="https://eventvoorbeeld.nl" target="_blank" rel="noopener">Open website</a>
+          <button class="btn sm" type="button" data-open-reviews data-title="Evenementen site – Groep 8" data-count="0">Reviews</button>
+          <button class="btn sm primary" type="button"
+            data-open-edit data-id="8" data-klas="INF2A" data-groep="Groep 8"
+            data-titel="Evenementen site – Groep 8" data-url="https://eventvoorbeeld.nl">
+            Aanpassen
+          </button>
+        </div>
+      </article>
+    </div>
+  </section>
+</div>
+
+<!-- ===== Overlay 1: Aanpassen ===== -->
+<div class="overlay" id="editOverlay" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="editTitle">
+    <div class="modal-head">
+      <div>
+        <div id="editTitle" class="title" style="font-size:14px">Website aanpassen</div>
+        <div class="muted">Pas titel, URL of groep aan (mockup).</div>
+      </div>
+      <button class="btn sm" id="closeEdit" type="button">Sluiten</button>
+    </div>
+
+    <div class="modal-body">
+      <div class="muted">Website-ID: <strong id="editId">—</strong></div>
+
+      <div class="edit-grid">
+        <div>
+          <label class="muted" for="editKlas">Klas</label>
+          <input id="editKlas" type="text" />
+        </div>
+        <div>
+          <label class="muted" for="editGroep">Groep</label>
+          <input id="editGroep" type="text" />
+        </div>
+
+        <div style="grid-column:1/-1">
+          <label class="muted" for="editTitel">Titel</label>
+          <input id="editTitel" type="text" />
+        </div>
+
+        <div style="grid-column:1/-1">
+          <label class="muted" for="editUrl">URL</label>
+          <input id="editUrl" type="url" />
+          <div class="hint">Later: client-side basischeck + server-side validatie (API).</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn" id="cancelEdit" type="button">Annuleren</button>
+      <button class="btn primary" id="saveEdit" type="button">Opslaan</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Overlay 2: Reviews bekijken ===== -->
+<div class="overlay" id="reviewsOverlay" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="reviewsTitle">
+    <div class="modal-head">
+      <div>
+        <div id="reviewsTitle" class="title" style="font-size:14px">Reviews</div>
+        <div class="muted" id="reviewsSub">—</div>
+      </div>
+      <button class="btn sm" id="closeReviews" type="button">Sluiten</button>
+    </div>
+
+    <div class="modal-body">
+      <div class="pill info" id="reviewsCount">0 reviews</div>
+
+      <div class="review-list" id="reviewsList" aria-label="Reviewlijst">
+        <!-- Mock data, later uit DB/API -->
+        <div class="review-item">
+          <div class="review-meta">
+            <span class="score">4/5</span>
+            <span class="date">2025-12-29</span>
+          </div>
+          <div>Goede structuur en duidelijke navigatie.</div>
+        </div>
+        <div class="review-item">
+          <div class="review-meta">
+            <span class="score">3/5</span>
+            <span class="date">2025-12-28</span>
+          </div>
+          <div>Op mobiel schuift de layout een beetje.</div>
+        </div>
+      </div>
+
+      <div class="notice">
+        In de echte versie: reviews zijn anoniem voor leerlingen, maar inzichtelijk voor docent.
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn" id="closeReviews2" type="button">Sluiten</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ===== Helpers =====
+  const qs = (s) => document.querySelector(s);
+  const qsa = (s) => Array.from(document.querySelectorAll(s));
+
+  function openOverlay(el){
+    el.classList.add('open');
+    el.setAttribute('aria-hidden', 'false');
+  }
+  function closeOverlay(el){
+    el.classList.remove('open');
+    el.setAttribute('aria-hidden', 'true');
+  }
+
+  // ===== Edit overlay =====
+  const editOverlay = qs('#editOverlay');
+  const editId = qs('#editId');
+  const editKlas = qs('#editKlas');
+  const editGroep = qs('#editGroep');
+  const editTitel = qs('#editTitel');
+  const editUrl = qs('#editUrl');
+
+  qsa('[data-open-edit]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      editId.textContent = btn.dataset.id || '—';
+      editKlas.value = btn.dataset.klas || '';
+      editGroep.value = btn.dataset.groep || '';
+      editTitel.value = btn.dataset.titel || '';
+      editUrl.value = btn.dataset.url || '';
+      openOverlay(editOverlay);
+      editTitel.focus();
+    });
+  });
+
+  qs('#closeEdit').addEventListener('click', () => closeOverlay(editOverlay));
+  qs('#cancelEdit').addEventListener('click', () => closeOverlay(editOverlay));
+  qs('#saveEdit').addEventListener('click', () => {
+    // Mock save: later API call + kaart updaten
+    closeOverlay(editOverlay);
+  });
+
+  editOverlay.addEventListener('click', (e) => { if(e.target === editOverlay) closeOverlay(editOverlay); });
+
+  // ===== Reviews overlay =====
+  const reviewsOverlay = qs('#reviewsOverlay');
+  const reviewsTitle = qs('#reviewsTitle');
+  const reviewsSub = qs('#reviewsSub');
+  const reviewsCount = qs('#reviewsCount');
+  const reviewsList = qs('#reviewsList');
+
+  qsa('[data-open-reviews]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const title = btn.dataset.title || 'Reviews';
+      const count = btn.dataset.count || '0';
+      reviewsTitle.textContent = `Reviews – ${title}`;
+      reviewsSub.textContent = 'Overzicht van ontvangen feedback (mock data)';
+      reviewsCount.textContent = `${count} reviews`;
+
+      // Heel simpel: bij 0 reviews toon je een lege state (mock)
+      if(Number(count) === 0){
+        reviewsList.innerHTML = '<div class="notice">Nog geen reviews geplaatst voor deze website.</div>';
+      } else {
+        // Laat de voorbeeldreviews staan (of vervang met mock per website)
+        reviewsList.innerHTML = `
+          <div class="review-item">
+            <div class="review-meta"><span class="score">4/5</span><span class="date">2025-12-29</span></div>
+            <div>Goede structuur en duidelijke navigatie.</div>
+          </div>
+          <div class="review-item">
+            <div class="review-meta"><span class="score">3/5</span><span class="date">2025-12-28</span></div>
+            <div>Op mobiel schuift de layout een beetje.</div>
+          </div>
+        `;
+      }
+
+      openOverlay(reviewsOverlay);
+    });
+  });
+
+  qs('#closeReviews').addEventListener('click', () => closeOverlay(reviewsOverlay));
+  qs('#closeReviews2').addEventListener('click', () => closeOverlay(reviewsOverlay));
+  reviewsOverlay.addEventListener('click', (e) => { if(e.target === reviewsOverlay) closeOverlay(reviewsOverlay); });
+
+  // ===== ESC closes any open overlay =====
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape'){
+      if(editOverlay.classList.contains('open')) closeOverlay(editOverlay);
+      if(reviewsOverlay.classList.contains('open')) closeOverlay(reviewsOverlay);
+    }
+  });
+</script>
+
+<footer>Docenteninterface – Websites overzicht (UI mockup)</footer>
+</body>
+</html>

@@ -1,0 +1,147 @@
+/* docent-split.css — alleen voor de docent splitview pagina */
+/* Vereist: ui.css is al geladen */
+
+.split{
+  display:grid;
+  grid-template-columns: 320px 1fr;
+  gap: 16px;
+  margin-top: 16px;
+  align-items: start;
+}
+
+/* Cruciaal voor tabellen/overflow in CSS grid */
+.split > *{ min-width: 0; }
+
+@media (max-width: 920px){
+  .split{ grid-template-columns: 1fr; }
+}
+
+.list{ display:grid; gap: 10px; }
+
+.row{
+  display:grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items:center;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  background: var(--surface);
+  box-shadow: 0 8px 20px rgba(37,48,71,0.05);
+  cursor: pointer;
+}
+
+.row:hover{
+  border-color: color-mix(in srgb, var(--border) 60%, var(--accent) 40%);
+}
+
+.row.active{
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--border) 45%);
+  background: color-mix(in srgb, var(--accent-soft) 35%, var(--surface) 65%);
+}
+
+.name{ font-weight: 800; }
+.sub{ font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+/* Tabel netjes in een scroll-container (aanrader) */
+.table-wrap{
+  max-height: 520px;
+  overflow:auto;
+  border-radius: var(--r);
+}
+
+.table{
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.table th, .table td{
+  text-align:left;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  font-size: 13px;
+}
+
+.table th{
+  font-size: 12px;
+  color: var(--muted);
+  background: var(--surface-2);
+}
+
+.table tr:last-child td{ border-bottom:none; }
+
+.score{ white-space: nowrap; font-weight: 800; }
+.date{ white-space: nowrap; color: var(--muted); font-size: 12px; }
+
+.empty{
+  padding: 14px;
+  border: 1px dashed color-mix(in srgb, var(--border) 70%, var(--accent) 30%);
+  border-radius: var(--r);
+  background: color-mix(in srgb, var(--accent-soft) 25%, var(--bg) 75%);
+  color: var(--muted);
+  font-size: 13px;
+}
+
+    /* ===== Overlay / modal (uses ui.css tokens; no duplicates) ===== */
+    .overlay{
+      position: fixed;
+      inset: 0;
+      background: rgba(37,48,71,0.45);
+      display: none;            /* hidden by default */
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      z-index: 999;
+    }
+    .overlay.open{ display: flex; }
+
+    .modal{
+      width: min(760px, 100%);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      box-shadow: 0 24px 60px rgba(37,48,71,0.25);
+      overflow: hidden;
+    }
+
+    .modal-head{
+      display:flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      padding: 14px 14px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface-2);
+    }
+
+    .modal-body{ padding: 14px; }
+    .modal-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      padding: 14px;
+      border-top: 1px solid var(--border);
+      background: color-mix(in srgb, var(--surface-2) 55%, white 45%);
+    }
+
+    .edit-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    @media (max-width: 720px){
+      .edit-grid{ grid-template-columns: 1fr; }
+    }
+    .hint{ font-size:12px; color:var(--muted); margin-top:6px; }
+
+    /* Make “Bewerken” buttons slightly smaller */
+    .btn.sm{ padding: 6px 10px; border-radius: 10px; }
+
+    /* Optional: cap the number of cards visually (mockup only) */
+    .grid{ margin-top: 12px; }

@@ -1,0 +1,88 @@
+<!-- =========================
+PAGE 2: leerling-beoordelen.html
+========================= -->
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Leerling – Beoordelen</title>
+  <link rel="stylesheet" href="ui.css">
+</head>
+<body>
+<header>
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">WRP</div>
+      <div>
+        <div>Website Review Platform</div>
+        <div class="muted">Leerling</div>
+      </div>
+    </div>
+    <div class="actions">
+      <span class="pill">Klas: INF2A</span>
+      <a class="btn" href="#">Inloggen</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="panel" aria-label="Beoordelen">
+    <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-end;flex-wrap:wrap;">
+      <div>
+        <div class="title">Beoordelen – Portfolio – Groep 1</div>
+        <div class="muted">Je ziet hier geen reviews van anderen. Alleen jouw beoordeling.</div>
+      </div>
+      <a class="btn" href="leerling-websites.html">Terug</a>
+    </div>
+
+    <nav class="nav" aria-label="Navigatie">
+      <a class="btn" href="leerling-websites.html">Websites</a>
+      <a class="btn" href="leerling-mijn-feedback.html">Feedback op mijn website</a>
+    </nav>
+
+    <div class="hr"></div>
+
+    <div class="panel" style="background:var(--bg);border-style:dashed" aria-label="Website info">
+      <div class="title" style="font-size:14px">Website info</div>
+      <div class="muted">Groep: Groep 1</div>
+      <div class="muted">URL: https://voorbeeldsite.nl</div>
+      <div class="nav" style="margin-top:10px">
+        <a class="btn" href="#" onclick="return false;">Open website (nieuw tabblad)</a>
+      </div>
+    </div>
+
+    <div class="hr"></div>
+
+    <div class="title" style="font-size:14px">Jouw review</div>
+    <div class="muted">Score (1–5) + korte toelichting.</div>
+
+    <div style="margin-top:10px;display:grid;gap:12px">
+      <div class="field">
+        <label class="muted" for="score">Score</label>
+        <select id="score">
+          <option value="">Kies score…</option>
+          <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label class="muted" for="comment">Toelichting</label>
+        <textarea id="comment" placeholder="Bijv. Navigatie is duidelijk, maar contrasten en headings kunnen beter…"></textarea>
+      </div>
+
+      <div class="nav">
+        <button class="btn primary" type="button">Verstuur review</button>
+        <button class="btn" type="button">Annuleren</button>
+      </div>
+
+      <div class="notice">
+        Let op: maximaal één review per website.
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>UI mockup (niet functioneel).</footer>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Docent – Feedbackoverzicht</title>
+  <link rel="stylesheet" href="ui.css">
+</head>
+<body>
+
+<header>
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo">WRP</div>
+      <div>
+        <div>Website Review Platform</div>
+        <div class="muted">Docent</div>
+      </div>
+    </div>
+    <div class="actions">
+      <span class="pill info">Klas: INF2A</span>
+      <button class="btn">Uitloggen</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- Dashboard -->
+  <section class="panel">
+    <div class="title">Docent dashboard</div>
+    <p class="muted">
+      Overzicht van feedbackgedrag van leerlingen. Gebruik dit overzicht om de kwaliteit van feedback te beoordelen.
+    </p>
+
+    <nav class="nav">
+      <a class="btn primary" href="docenten-splitview-HTML.html">Feedback per leerling</a>
+      <a class="btn" href="#">Websites overzicht</a>
+    </nav>
+  </section>
+
+  <!-- Feedback per leerling -->
+  <section class="panel" style="margin-top:16px">
+    <div class="title">Feedback per leerling</div>
+    <p class="muted">Klik op een leerling om de gegeven feedback te bekijken.</p>
+
+    <div class="grid">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <strong>Stefan Jansen</strong>
+            <div class="meta">Reviews geplaatst</div>
+          </div>
+          <span class="pill good">3 reviews</span>
+        </div>
+        <a class="btn" href="#">Bekijk feedback</a>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <strong>Lisa de Vries</strong>
+            <div class="meta">Nog geen feedback</div>
+          </div>
+          <span class="pill warn">0 reviews</span>
+        </div>
+        <a class="btn" href="#">Bekijk feedback</a>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <strong>Ahmed El Amrani</strong>
+            <div class="meta">Feedback gegeven</div>
+          </div>
+          <span class="pill good">2 reviews</span>
+        </div>
+        <a class="btn" href="#">Bekijk feedback</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detail (voorbeeld) -->
+  <section class="panel" style="margin-top:16px">
+    <div class="title">Feedbackdetails – Stefan Jansen</div>
+    <p class="muted">Overzicht van de door deze leerling gegeven feedback.</p>
+
+    <div class="card">
+      <div class="meta">Website: Portfolio – Groep 1</div>
+      <div class="meta">Score: 4/5 • Datum: 2025-12-29</div>
+      <p>Duidelijke structuur en goede navigatie. Typografie kan consistenter.</p>
+    </div>
+
+    <div class="card" style="margin-top:10px">
+      <div class="meta">Website: Webshop – Groep 2</div>
+      <div class="meta">Score: 3/5 • Datum: 2025-12-28</div>
+      <p>Functioneel, maar layout is op mobiel onrustig.</p>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  Docenteninterface – UI mockup (niet functioneel)
+</footer>
+
+</body>
+</html>

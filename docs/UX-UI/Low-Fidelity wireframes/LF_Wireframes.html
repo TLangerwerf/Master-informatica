@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <title>Wireframe – Docent Websites</title>
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background:#f2f2f2;
+      margin:0;
+      padding:20px;
+    }
+    .box{
+      border:2px dashed #999;
+      background:#fff;
+      padding:12px;
+      margin-bottom:12px;
+    }
+    .row{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      margin-bottom:8px;
+    }
+    .grow{ flex:1; }
+    .btn{
+      border:2px solid #999;
+      padding:6px 10px;
+      background:#eaeaea;
+      font-size:12px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    .overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.4);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .modal{
+      width:500px;
+      background:#fff;
+      border:3px dashed #999;
+      padding:16px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="box">
+  <strong>Header</strong><br>
+  - Titel applicatie<br>
+  - Rol: docent<br>
+  - Uitloggen
+</div>
+
+<!-- NAVIGATIE -->
+<div class="box">
+  <strong>Navigatie</strong><br>
+  [ Websites overzicht ] [ Reviews per leerling ]
+</div>
+
+<!-- OVERZICHT -->
+<div class="box">
+  <strong>Websites overzicht</strong>
+
+  <div class="grid">
+
+    <!-- Website item -->
+    <div class="box">
+      Website-item
+      <div class="row">
+        <div class="grow">Website titel</div>
+        <div>[ # reviews ]</div>
+      </div>
+      <div class="row">
+        <div class="btn">Open website</div>
+        <div class="btn">Bekijk reviews</div>
+        <div class="btn">Aanpassen</div>
+      </div>
+    </div>
+
+    <!-- Herhaling -->
+    <div class="box">Website-item (zelfde functies)</div>
+    <div class="box">Website-item (zelfde functies)</div>
+    <div class="box">Website-item (zelfde functies)</div>
+
+  </div>
+</div>
+
+<!-- OVERLAY: AANPASSEN -->
+<div class="overlay">
+  <div class="modal">
+    <strong>Overlay – Website aanpassen</strong><br><br>
+
+    [ Invoerveld: titel ]<br><br>
+    [ Invoerveld: URL ]<br><br>
+    [ Invoerveld: groep ]<br><br>
+
+    <div class="row">
+      <div class="btn">Opslaan</div>
+      <div class="btn">Annuleren</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

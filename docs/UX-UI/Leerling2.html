@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Leerlinginterface – Website Review Platform (simpel UI mockup)</title>
+  <style>
+    :root{
+      --bg:#f6f7f9; --card:#fff; --text:#111827; --muted:#6b7280; --border:#e5e7eb;
+      --radius:14px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:980px;margin:0 auto;padding:18px}
+    header{position:sticky;top:0;background:rgba(246,247,249,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;max-width:980px;margin:0 auto;}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800}
+    .logo{width:34px;height:34px;border-radius:10px;border:1px solid var(--border);background:var(--card);display:grid;place-items:center;font-size:12px}
+    .actions{display:flex;align-items:center;gap:10px}
+    .pill{font-size:12px;color:var(--muted);border:1px solid var(--border);background:var(--card);padding:6px 10px;border-radius:999px}
+    .btn{border:1px solid var(--border);background:var(--card);padding:8px 12px;border-radius:10px;font-weight:700;cursor:pointer}
+    .btn.primary{background:#111827;color:#fff;border-color:#111827}
+    .muted{color:var(--muted);font-size:13px}
+    .panel{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px}
+    .grid{display:grid;grid-template-columns:repeat(2, minmax(0,1fr));gap:12px;margin-top:12px}
+    @media (max-width: 720px){.grid{grid-template-columns:1fr}}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px;display:grid;gap:10px}
+    .card-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+    .title{font-weight:800}
+    .meta{font-size:12px;color:var(--muted)}
+    .card-actions{display:flex;gap:10px;flex-wrap:wrap}
+    .hr{height:1px;background:var(--border);margin:10px 0}
+    .notice{border:1px dashed var(--border);background:var(--bg);padding:10px 12px;border-radius:12px;font-size:13px;color:var(--muted)}
+    footer{padding:22px 18px;color:var(--muted);font-size:12px;text-align:center}
+    /* Simple “pages” layout (static mock): */
+    .page-title{display:flex;align-items:flex-end;justify-content:space-between;gap:10px}
+    .nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">WRP</div>
+      <div>
+        <div>Website Review Platform</div>
+        <div class="muted">Leerling</div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <span class="pill">Klas: INF2A</span>
+      <button class="btn" type="button">Inloggen</button>
+      <!-- ingelogd: -->
+      <!-- <button class="btn" type="button">Uitloggen</button> -->
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- PAGE 1: OVERZICHT (default) -->
+  <section class="panel" aria-label="Overzichtspagina">
+    <div class="page-title">
+      <div>
+        <div class="title">Beschikbare websites (max. 10)</div>
+        <div class="muted">Klik op een website om te beoordelen. Op de detailpagina zie je geen reviews van anderen.</div>
+      </div>
+      <span class="pill">Jouw groep: Groep 3</span>
+    </div>
+
+    <div class="nav" aria-label="Navigatie">
+      <button class="btn primary" type="button">Websites</button>
+      <button class="btn" type="button">Feedback op mijn website</button>
+    </div>
+
+    <div class="grid" aria-label="Website lijst">
+      <!-- Card 1 -->
+      <article class="card">
+        <div class="card-head">
+          <div>
+            <div class="title">Portfolio – Groep 1</div>
+            <div class="meta">Eigenaar: Groep 1</div>
+          </div>
+          <span class="pill">Te beoordelen</span>
+        </div>
+        <p class="muted">Korte omschrijving van de website (optioneel).</p>
+        <div class="card-actions">
+          <button class="btn primary" type="button">Beoordelen</button>
+          <button class="btn" type="button">Open website</button>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="card">
+        <div class="card-head">
+          <div>
+            <div class="title">Webshop concept – Groep 2</div>
+            <div class="meta">Eigenaar: Groep 2</div>
+          </div>
+          <span class="pill">Te beoordelen</span>
+        </div>
+        <p class="muted">Korte omschrijving van de website (optioneel).</p>
+        <div class="card-actions">
+          <button class="btn primary" type="button">Beoordelen</button>
+          <button class="btn" type="button">Open website</button>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="card">
+        <div class="card-head">
+          <div>
+            <div class="title">Nieuws site – Groep 4</div>
+            <div class="meta">Eigenaar: Groep 4</div>
+          </div>
+          <span class="pill">Beoordeeld</span>
+        </div>
+        <p class="muted">Korte omschrijving van de website (optioneel).</p>
+        <div class="card-actions">
+          <button class="btn primary" type="button">Beoordelen</button>
+          <button class="btn" type="button">Open website</button>
+        </div>
+      </article>
+
+      <!-- Voeg tot max 10 cards toe -->
+    </div>
+
+    <div class="hr"></div>
+    <div class="notice">
+      Tip: open de website in een nieuw tabblad. Geef daarna jouw score en toelichting op de beoordelingspagina.
+      Reviews van anderen worden niet getoond tijdens het beoordelen.
+    </div>
+  </section>
+
+  <div style="height:16px"></div>
+
+  <!-- PAGE 2: WEBSITE DETAIL (beoordelen) -->
+  <section class="panel" aria-label="Beoordelingspagina (detail)">
+    <div class="page-title">
+      <div>
+        <div class="title">Beoordelen – Portfolio – Groep 1</div>
+        <div class="muted">Bekijk de website en geef jouw review. (Geen reviews van anderen zichtbaar.)</div>
+      </div>
+      <button class="btn" type="button">Terug naar overzicht</button>
+    </div>
+
+    <div class="hr"></div>
+
+    <div class="panel" style="background:var(--bg); border-style:dashed" aria-label="Website info">
+      <div class="title" style="font-size:14px">Website info</div>
+      <div class="muted">Groep: Groep 1</div>
+      <div class="muted">URL: https://voorbeeldsite.nl</div>
+      <div class="nav" style="margin-top:10px">
+        <button class="btn" type="button">Open website (nieuw tabblad)</button>
+      </div>
+    </div>
+
+    <div class="hr"></div>
+
+    <div class="title" style="font-size:14px">Jouw review</div>
+    <div class="muted">Geef een score (1–5) en schrijf kort wat goed is en wat beter kan.</div>
+
+    <div style="margin-top:10px; display:grid; gap:10px; max-width:520px">
+      <label class="muted" for="score">Score (1–5)</label>
+      <select id="score" class="btn" style="text-align:left">
+        <option value="">Kies score…</option>
+        <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+      </select>
+
+      <label class="muted" for="comment">Toelichting</label>
+      <textarea id="comment" class="btn" style="text-align:left; min-height:120px; font-weight:500"
+        placeholder="Bijv. Navigatie is duidelijk, maar contrasten en headings kunnen sterker…"></textarea>
+
+      <div class="card-actions">
+        <button class="btn primary" type="button">Verstuur review</button>
+        <button class="btn" type="button">Annuleren</button>
+      </div>
+
+      <div class="notice">
+        Let op: je kunt maximaal één review per website plaatsen.
+      </div>
+    </div>
+  </section>
+
+  <div style="height:16px"></div>
+
+  <!-- PAGE 3: FEEDBACK OP MIJN WEBSITE (groep) -->
+  <section class="panel" aria-label="Feedback op mijn website">
+    <div class="page-title">
+      <div>
+        <div class="title">Feedback op mijn website (Groep 3)</div>
+        <div class="muted">Hier zie je alle ontvangen reviews voor jouw groepswebsite. Reviews zijn anoniem.</div>
+      </div>
+      <button class="btn" type="button">Terug naar websites</button>
+    </div>
+
+    <div class="hr"></div>
+
+    <div class="panel" style="background:var(--bg); border-style:dashed">
+      <div class="title" style="font-size:14px">Gemiddelde score</div>
+      <div class="muted">4.2 / 5 (voorbeeld)</div>
+    </div>
+
+    <div class="hr"></div>
+
+    <div class="title" style="font-size:14px">Ontvangen reviews</div>
+    <div style="display:grid; gap:10px; margin-top:10px; max-width:780px">
+      <div class="card">
+        <div class="meta">Score: 4/5 • Datum: 2025-12-29</div>
+        <div>Goede structuur en duidelijke navigatie. Contactpagina kan iets duidelijker.</div>
+      </div>
+      <div class="card">
+        <div class="meta">Score: 5/5 • Datum: 2025-12-28</div>
+        <div>Strak design en goede leesbaarheid. Laadt snel.</div>
+      </div>
+      <div class="card">
+        <div class="meta">Score: 3/5 • Datum: 2025-12-27</div>
+        <div>Mooi idee, maar op mobiel schuift de layout. Let op contrasten.</div>
+      </div>
+    </div>
+
+    <div class="hr"></div>
+    <div class="notice">
+      Tip: kies 2–3 punten uit de feedback en plan verbeteringen voor je volgende versie.
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  Simpele UI mockup (niet functioneel). Detailpagina toont geen reviews van anderen; ontvangen feedback staat op een aparte pagina.
+</footer>
+
+</body>
+</html>

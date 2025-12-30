@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Docent – Reviews per leerling (split view, consistent)</title>
+
+  <link rel="stylesheet" href="ui.css" />
+   <link rel="stylesheet" href="docent-split.css" />
+
+  <style>
+    /* ===== Split view (consistent met websites-overzicht stijl) ===== */
+    .split{
+      display:grid;
+      grid-template-columns: 360px 1fr;
+      gap: 16px;
+      margin-top: 16px;
+      align-items: start;
+    }
+    .split > *{ min-width:0; }
+    @media (max-width: 920px){ .split{ grid-template-columns: 1fr; } }
+
+    .page-head{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:flex-end;
+      flex-wrap:wrap;
+    }
+    .btn.sm{ padding:6px 10px; border-radius:10px; }
+
+    /* Left list: same “row card” language as new overview */
+    .list{ display:grid; gap: 10px; margin-top: 12px; }
+    .row{
+      display:grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items:center;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      background: var(--surface);
+      box-shadow: 0 8px 20px rgba(37,48,71,0.05);
+      cursor: pointer;
+      transition: border-color .15s ease, transform .05s ease, background .15s ease;
+    }
+    .row:hover{
+      border-color: color-mix(in srgb, var(--border) 60%, var(--accent) 40%);
+    }
+    .row:active{ transform: translateY(1px); }
+    .row.active{
+      border-color: color-mix(in srgb, var(--accent) 55%, var(--border) 45%);
+      background: color-mix(in srgb, var(--accent-soft) 35%, var(--surface) 65%);
+    }
+    .name{ font-weight: 800; }
+    .sub{ font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    /* Right side: use cards (like overview) instead of a heavy table */
+    .right-head{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:flex-end;
+      flex-wrap:wrap;
+    }
+    .inline-actions{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+
+    .review-wrap{
+      margin-top: 12px;
+      display:grid;
+      gap: 10px;
+      max-height: 560px;       /* ~ ruimte voor ±15 regels + scroll */
+      overflow:auto;
+      padding-right: 2px;      /* voorkomt “scrollbar clip” */
+    }
+    .review-item{
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 12px;
+      background: var(--surface);
+      box-shadow: 0 8px 22px rgba(37,48,71,0.05);
+      display:grid;
+      gap: 6px;
+    }
+    .review-meta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:baseline;
+    }
+    .review-meta .score{ font-weight: 800; }
+    .review-meta .date{ color: var(--muted); font-size: 12px; }
+    .review-meta .site{ color: var(--muted); font-size: 12px; }
+
+    .empty{
+      border: 1px dashed color-mix(in srgb, var(--border) 70%, var(--accent) 30%);
+      background: color-mix(in srgb, var(--accent-soft) 25%, var(--bg) 75%);
+      border-radius: var(--r);
+      padding: 12px;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 12px;
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo">WRP</div>
+      <div>
+        <div>Website Review Platform</div>
+        <div class="muted">Docent</div>
+      </div>
+    </div>
+    <div class="actions">
+      <span class="pill info">Klas: INF2A</span>
+      <span class="pill info">Rol: docent</span>
+      <button class="btn">Uitloggen</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section class="panel">
+    <div class="page-head">
+      <div>
+        <div class="title">Reviews per leerling</div>
+        <div class="muted">Links kies je een leerling, rechts zie je direct de geplaatste reviews. (Mockup)</div>
+      </div>
+
+      <nav class="nav" aria-label="Docent navigatie">
+        <a class="btn" href="docent-websites-overzicht.html">Websites</a>
+        <a class="btn primary" href="#" aria-current="page">Reviews per leerling</a>
+      </nav>
+    </div>
+
+    <div class="notice">
+      Ontwerpkeuze: split view voorkomt veel pagina-wissels. Status (aantal reviews) is direct zichtbaar per leerling.
+    </div>
+  </section>
+
+  <div class="split">
+
+    <!-- LEFT: leerlingen -->
+    <aside class="panel" aria-label="Leerlingenlijst">
+      <div class="title" style="font-size:14px">Leerlingen</div>
+      <div class="muted">Badge = aantal geplaatste reviews.</div>
+
+      <div class="list" role="list">
+        <div class="row active" role="listitem" aria-current="true">
+          <div>
+            <div class="name">Stefan Jansen</div>
+            <div class="sub">Laatste review: 2025-12-29</div>
+          </div>
+          <span class="pill good">3</span>
+        </div>
+
+        <div class="row" role="listitem">
+          <div>
+            <div class="name">Lisa de Vries</div>
+            <div class="sub">Nog geen feedback</div>
+          </div>
+          <span class="pill warn">0</span>
+        </div>
+
+        <div class="row" role="listitem">
+          <div>
+            <div class="name">Ahmed El Amrani</div>
+            <div class="sub">Laatste review: 2025-12-28</div>
+          </div>
+          <span class="pill good">2</span>
+        </div>
+
+        <div class="row" role="listitem">
+          <div>
+            <div class="name">Eva Bakker</div>
+            <div class="sub">Laatste review: 2025-12-27</div>
+          </div>
+          <span class="pill good">1</span>
+        </div>
+
+        <div class="row" role="listitem">
+          <div>
+            <div class="name">Noah Visser</div>
+            <div class="sub">Laatste review: 2025-12-29</div>
+          </div>
+          <span class="pill good">4</span>
+        </div>
+      </div>
+
+      <div class="hr"></div>
+      <div class="notice">
+        Tip: let op concreetheid (“wat is goed / wat kan beter”) en toon.
+      </div>
+    </aside>
+
+    <!-- RIGHT: reviews -->
+    <main class="panel" aria-label="Reviews van geselecteerde leerling">
+      <div class="right-head">
+        <div>
+          <div class="title" style="font-size:14px">Reviews – Stefan Jansen</div>
+          <div class="muted">Scrollbaar overzicht met ruimte voor ±15 regels.</div>
+        </div>
+
+        <div class="inline-actions">
+          <span class="pill info">Totaal: 3</span>
+          <button class="btn sm">Exporteer (later)</button>
+        </div>
+      </div>
+
+      <div class="hr"></div>
+
+      <!-- Als leeg: vervang review-wrap door .empty -->
+      <!-- <div class="empty">Deze leerling heeft nog geen reviews geplaatst.</div> -->
+
+      <div class="review-wrap" aria-label="Reviewlijst">
+        <div class="review-item">
+          <div class="review-meta">
+            <span class="score">4/5</span>
+            <span class="site">Portfolio – Groep 1</span>
+            <span class="date">2025-12-29</span>
+          </div>
+          <div>Duidelijke structuur en navigatie. Typografie kan consistenter (kopjes/afstand).</div>
+        </div>
+
+        <div class="review-item">
+          <div class="review-meta">
+            <span class="score">3/5</span>
+            <span class="site">Webshop concept – Groep 2</span>
+            <span class="date">2025-12-28</span>
+          </div>
+          <div>Goede basis, maar op mobiel schuift de layout. Let op contrasten en spacing.</div>
+        </div>
+
+        <div class="review-item">
+          <div class="review-meta">
+            <span class="score">5/5</span>
+            <span class="site">Nieuwswebsite – Groep 3</span>
+            <span class="date">2025-12-27</span>
+          </div>
+          <div>Heel overzichtelijk. Sterke headings en logische opbouw. Snelle laadtijd.</div>
+        </div>
+
+        <!-- extra voorbeeldregels (zodat je ~15 regels kunt vullen) -->
+        <div class="review-item">
+          <div class="review-meta">
+            <span class="score">4/5</span>
+            <span class="site">Reisblog – Groep 4</span>
+            <span class="date">2025-12-26</span>
+          </div>
+          <div>Fijn kleurgebruik en duidelijke CTA’s. Foto’s mogen iets kleiner voor meer rust.</div>
+        </div>
+
+        <div class="review-item">
+          <div class="review-meta">
+            <span class="score">3/5</span>
+            <span class="site">Landingpage – Groep 5</span>
+            <span class="date">2025-12-25</span>
+          </div>
+          <div>Tekst helder, maar de call-to-action valt weg onderaan op mobiel.</div>
+        </div>
+      </div>
+    </main>
+
+  </div>
+</div>
+
+<footer>Docenteninterface – Reviews per leerling (split view, UI mockup)</footer>
+</body>
+</html>

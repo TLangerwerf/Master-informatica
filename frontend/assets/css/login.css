@@ -3,8 +3,8 @@
 .login-wrap{
   display:grid;
   grid-template-columns: 1.1fr .9fr;
-  gap: 16px;
-  margin-top: 16px;
+  gap:16px;
+  margin-top:16px;
   align-items:start;
 }
 
@@ -13,5 +13,5 @@
 }
 
 .login-actions{
-  margin-top: 12px;
+  margin-top:12px;
 }

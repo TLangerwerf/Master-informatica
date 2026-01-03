@@ -1,4 +1,4 @@
-// login.js — kleine UX helpers (geen login logica; dat is PHP)
+
 document.addEventListener("DOMContentLoaded", () => {
   const userField = document.getElementById("username");
   const pwField = document.getElementById("password");

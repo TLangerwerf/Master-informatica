@@ -1,0 +1,17 @@
+/* login.css — page-specific styles (ui.css blijft generiek) */
+
+.login-wrap{
+  display:grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap:16px;
+  margin-top:16px;
+  align-items:start;
+}
+
+@media (max-width: 920px){
+  .login-wrap{ grid-template-columns: 1fr; }
+}
+
+.login-actions{
+  margin-top:12px;
+}

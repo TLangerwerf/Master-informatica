@@ -1,5 +1,7 @@
 # MasterPiece
 
+
+
 ## Projectomschrijving
 Dit project betreft een educatieve webapplicatie waarin leerlingen websites van klasgenoten kunnen bekijken en gestructureerde feedback kunnen geven. De applicatie is bedoeld als leerinstrument binnen het ICT-onderwijs en wordt ingezet om zowel technische ontwikkeling als feedbackvaardigheden te ondersteunen.
 

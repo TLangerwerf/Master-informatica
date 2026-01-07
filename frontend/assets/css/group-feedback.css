@@ -1,0 +1,40 @@
+/* Preview controls */
+.preview-controls{
+  margin-bottom:16px;
+}
+
+.preview-form{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+/* Preview frame */
+.preview-wrap{
+  max-width:100%;
+  border-radius:14px;
+  overflow:hidden;
+  border:1px solid #e6e8ef;
+  background:#f2f4f8;
+  box-shadow: 0 6px 18px rgba(17,24,39,0.06);
+}
+
+.preview-wrap iframe{
+  width:100%;
+  height:100%;
+  border:0;
+  background:#fff;
+}
+
+.splitscreen{
+  display:grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+}
+
+.keuzemenu{
+  display:grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: 12px;}

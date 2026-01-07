@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
-
 $hash = null;
 $password = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
   $password = (string)($_POST['password'] ?? '');
   if ($password !== '') {
     $hash = password_hash($password, PASSWORD_DEFAULT);
@@ -23,7 +23,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </style>
 </head>
 <body>
-
+<!-- Menu -->
+       <div class="menu">
+       <?php if (is_teacher()): ?>
+        <a href="users_admin.php" class="btn primary">
+          Gebruikersbeheer
+        </a>
+        <a href="group_feedback.php" class="btn primary">
+          Alle feedback
+        </a>
+        <a href="grou.php" class="btn primary">
+          Websites
+        </a>
+      <?php endif; ?>
+       </div>
 <h2>Password hash generator (dev only)</h2>
 
 <form method="post">

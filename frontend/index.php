@@ -181,6 +181,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'add_r
         <?php endif; ?>
       </div>
 
+      <!-- Menu -->
+       <div class="menu">
+       <?php if (is_teacher()): ?>
+        <a href="users_admin.php" class="btn primary">
+          Gebruikersbeheer
+        </a>
+        <a href="group_feedback.php" class="btn primary">
+          Alle feedback
+        </a>
+        <a href="grou.php" class="btn primary">
+          Websites
+        </a>
+      <?php endif; ?>
+       </div>
+
       <!-- Login  -->
       <div class="auth">
         <?php if (!$user): ?>
@@ -206,6 +221,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'add_r
           </div>
         <?php endif; ?>
       </div>
+    
+
+      
     </div>
 
     <!-- Grid met 200x200 previews -->
@@ -259,8 +277,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'add_r
                       Review
                     </button>
                 <?php else: ?>
-                  <span class="btnlink disabled" aria-disabled="true" title="Log in om te reviewen">Review</span>
-                <?php endif; ?>
+  <span class="btnlink disabled" aria-disabled="true" title="Log eerst in">
+    Review <span class="muted">(Log eerst in)</span>
+  </span>
+<?php endif; ?>
 
                 <a class="btnlink primary" href="<?= $s['url']; ?>" target="_blank" rel="noopener noreferrer">Bekijk</a>
                 

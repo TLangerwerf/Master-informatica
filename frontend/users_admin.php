@@ -345,7 +345,7 @@ function fv(array $form, string $key, string $fallback = ''): string {
         <a href="group_feedback.php" class="btn primary">
           Alle feedback
         </a>
-        <a href="grou.php" class="btn primary">
+        <a href="feedback-counts.php" class="btn primary">
           Websites
         </a>
       <?php endif; ?>

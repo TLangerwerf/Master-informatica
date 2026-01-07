@@ -101,20 +101,25 @@ if ($groupId > 0) {
       <h1 style="margin:0 0 6px;">Feedback per groep</h1>
       <div class="muted">Kies een groep en bekijk de website + alle feedback (met feedbackgever).</div>
     </div>
-    <!-- Menu -->
-       <div class="menu">
-       <?php if (is_teacher()): ?>
-        <a href="users_admin.php" class="btn primary">
-          Gebruikersbeheer
-        </a>
-        <a href="group_feedback.php" class="btn primary">
-          Alle feedback
-        </a>
-        <a href="grou.php" class="btn primary">
-          Websites
-        </a>
-      <?php endif; ?>
-       </div>
+   <!-- Deze lege menu-div staat hier als "spacer" (laten staan voor layout) -->
+      <div class="menu">
+        
+      </div>
+
+      <!-- Menu -->
+      <div class="menu">
+        <?php if (is_teacher()): ?>
+          <a href="users_admin.php" class="btn primary">
+            Gebruikersbeheer
+          </a>
+          <a href="group_feedback.php" class="btn primary">
+            Feedback per groep
+          </a>
+          <a href="feedback-counts.php" class="btn primary">
+            Feedback per leerling
+          </a>
+        <?php endif; ?>
+      </div>
   </div>
 <div class = "keuzemenu">
   <!-- klas kiezen -->

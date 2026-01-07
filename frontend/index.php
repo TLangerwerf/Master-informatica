@@ -234,13 +234,14 @@ $sites = $stmt->fetchAll();
             Gebruikersbeheer
           </a>
           <a href="group_feedback.php" class="btn primary">
-            Alle feedback
+            Feedback per groep
           </a>
-          <a href="grou.php" class="btn primary">
-            Websites
+          <a href="feedback-counts.php" class="btn primary">
+            Feedback per leerling
           </a>
         <?php endif; ?>
       </div>
+    
 
       <!-- Login  -->
       <div class="auth">
@@ -336,18 +337,7 @@ $sites = $stmt->fetchAll();
 
               <a class="btnlink primary" href="<?= $s['url']; ?>" target="_blank" rel="noopener noreferrer">Bekijk</a>
 
-              <?php if (is_teacher()): ?>
-                <button class="btn sm primary"
-                  type="button"
-                  data-open-edit
-                  data-site-id="<?= (int)$s['id'] ?>"
-                  data-group-id="<?= (int)$s['group_id'] ?>"
-                  data-group-name="<?= $s['group_name'] ?>"
-                  data-title="<?= $s['title'] ?>"
-                  data-url="<?= $s['url'] ?>">
-                  Aanpassen
-                </button>
-              <?php endif; ?>
+              
             </div>
           </div>
 
@@ -416,21 +406,21 @@ $sites = $stmt->fetchAll();
         <div class="modal-head">
           <div>
             <div class="title" id="reviewsTitle">Feedback</div>
-            <div class="muted" id="FeedbackSub">—</div>
+            <div class="muted" id="reviewsSub">—</div>
           </div>
           <button class="btn" type="button" data-close>Sluiten</button>
         </div>
 
         <div class="hr"></div>
 
-        <div id="FeedbackBody" class="muted">Laden…</div>
+        <div id="reviewsBody" class="muted">Laden…</div>
       </div>
     </div>
 
   </div>
 
   <script src="assets/scripts/review.js" data-open="<?= $modalOpen ? '1' : '0' ?>"></script>
-  <script defer src="assets/scripts/site-Feedback.js"></script>
+  <script defer src="assets/scripts/site-reviews.js"></script>
 
 </body>
 </html>

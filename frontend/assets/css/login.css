@@ -1,5 +1,6 @@
 /* login.css — page-specific styles (ui.css blijft generiek) */
 
+/* Kleine layout helper voor de login pagina */
 .login-wrap{
   display:grid;
   grid-template-columns: 1.1fr .9fr;

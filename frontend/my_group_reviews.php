@@ -107,9 +107,25 @@ function fetch_reviews(PDO $pdo, int $siteId): array {
       </div>
     </div>
 
-    <div class="topbar-actions">
-      <a class="btn secondary" href="index.php">Terug</a>
-    </div>
+     <!-- Deze lege menu-div staat hier als "spacer" (laten staan voor layout) -->
+      <div class="menu">
+        
+      </div>
+
+      <!-- Menu -->
+      <div class="menu">
+        <?php if (is_teacher()): ?>
+          <a href="users_admin.php" class="btn primary">
+            Gebruikersbeheer
+          </a>
+          <a href="group_feedback.php" class="btn primary">
+            Feedback per groep
+          </a>
+          <a href="feedback-counts.php" class="btn primary">
+            Feedback per leerling
+          </a>
+        <?php endif; ?>
+      </div>
   </div>
 
   <?php if (!$hasGroupId): ?>

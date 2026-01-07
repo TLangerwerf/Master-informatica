@@ -1,5 +1,8 @@
+/* user-admin.css — page-specific styles (admin) */
 
-/* Mode banners */
+/* =========================
+   Mode banners
+========================= */
 .mode-banner{
   padding:12px 16px;
   border-radius:12px;
@@ -8,28 +11,28 @@
   font-weight:600;
 }
 
-/* Create mode */
 .mode-banner.create{
   background:#eff6ff;
   color:#1e3a8a;
   border:1px solid #bfdbfe;
 }
 
-/* Edit mode */
 .mode-banner.edit{
   background:#fff7ed;
   color:#9a3412;
   border:1px solid #fed7aa;
 }
 
-/* Button variants */
+/* =========================
+   Button variants (aanvullend op ui.css)
+========================= */
 .btn.primary{
   background: var(--accent);
   color:#fff;
 }
 
 .btn.warning{
-  background:#f59e0b;          /* amber */
+  background:#f59e0b; /* amber */
   color:#1f2937;
   box-shadow:0 8px 20px rgba(245,158,11,.35);
 }
@@ -38,23 +41,34 @@
   filter: brightness(1.05);
 }
 
+/* =========================
+   Interactie helpers
+========================= */
 .clickable-row{
-  cursor: pointer;
+  cursor:pointer;
 }
+
 .clickable-row:hover{
-  background: #fafbff;
+  background:#fafbff;
 }
+
 .clickable-row:focus{
-  outline: 2px solid color-mix(in srgb, var(--accent) 55%, white 45%);
-  outline-offset: -2px;
+  outline:2px solid color-mix(in srgb, var(--accent) 55%, white 45%);
+  outline-offset:-2px;
 }
+
+/* =========================
+   Layout
+========================= */
 .split{
   display:grid;
   grid-template-columns: auto 1fr;
-  align-items: start;
-  
+  align-items:start;
 }
 
+/* =========================
+   Table tweaks
+========================= */
 .users-table th,
 .users-table td{
   overflow:hidden;
@@ -64,21 +78,13 @@
 
 /* Kolombreedtes */
 .users-table th:nth-child(1),
-.users-table td:nth-child(1){
-  width:50%;
-}
+.users-table td:nth-child(1){ width:50%; }
 
 .users-table th:nth-child(2),
-.users-table td:nth-child(2){
-  width:25%;
-}
+.users-table td:nth-child(2){ width:25%; }
 
 .users-table th:nth-child(3),
-.users-table td:nth-child(3){
-  width:15%;
-}
+.users-table td:nth-child(3){ width:15%; }
 
 .users-table th:nth-child(4),
-.users-table td:nth-child(4){
-  width:10%;
-}
+.users-table td:nth-child(4){ width:10%; }

@@ -190,7 +190,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'add_r
         <a href="group_feedback.php" class="btn primary">
           Alle feedback
         </a>
-        <a href="grou.php" class="btn primary">
+        <a href="feedback_tables.php" class="btn primary">
           Websites
         </a>
       <?php endif; ?>

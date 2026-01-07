@@ -38,7 +38,7 @@ modal.addEventListener("click", (e) => {
   });
 
   async function loadReviews(siteId, siteTitle, groupName) {
-    titleEl.textContent = "Reviews";
+    titleEl.textContent = "Feedback";
     subEl.textContent = `${siteTitle} – ${groupName}`;
     bodyEl.textContent = "Laden…";
     openModal();
@@ -53,13 +53,33 @@ modal.addEventListener("click", (e) => {
         return;
       }
 
-      bodyEl.innerHTML = items.map(r => `
-        <div class="review-row">
-          <div class="review-score">Score: ${r.score}/5</div>
-          <div>${r.comment}</div>
-          <div class="review-date">${String(r.created_at).slice(0,10)}</div>
-        </div>
-      `).join("");
+      // ✅ Gemiddelde score berekenen
+      const scores = items
+        .map(r => Number(r.score))
+        .filter(n => Number.isFinite(n) && n >= 1 && n <= 5);
+
+      const avg = scores.length
+        ? (scores.reduce((a, b) => a + b, 0) / scores.length)
+        : 0;
+
+      const avgHtml = scores.length
+        ? `<div class="reviews-summary">
+             <strong>Gemiddelde score:</strong> ${avg.toFixed(1)}/5
+             <span class="muted">(${scores.length} review(s))</span>
+           </div>`
+        : '';
+
+      // ✅ Eerst de summary, dan de lijst
+      bodyEl.innerHTML =
+        avgHtml +
+        items.map(r => `
+          <div class="review-row">
+            <div class="review-score">Score: ${r.score}/5</div>
+            <div>${r.comment}</div>
+            <div class="review-date">${String(r.created_at).slice(0,10)}</div>
+          </div>
+        `).join("");
+
 
     } catch (err) {
       console.error(err);

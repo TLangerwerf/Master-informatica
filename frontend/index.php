@@ -161,6 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'add_r
 <!doctype html>
 <html lang="nl">
 <head>
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Websites</title>
@@ -176,13 +177,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'add_r
         <div class="sub">Overzicht van ingezonden websites</div>
       </div>
       <div class="menu">
-        <?php if ($user): ?>
-          <a href="my_group_reviews.php" class="btn primary">Mijn groepsfeedback</a>
-        <?php endif; ?>
+        
       </div>
 
       <!-- Menu -->
        <div class="menu">
+
        <?php if (is_teacher()): ?>
         <a href="users_admin.php" class="btn primary">
           Gebruikersbeheer
@@ -252,7 +252,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'add_r
             <?php else: ?>
               <div class="desc muted">Geen beschrijving.</div>
             <?php endif; ?>
-              
+                <button class="btn sm"
+                  type="button"
+                  data-open-reviews
+                  data-site-id="<?= (int)$s['id'] ?>"
+                  data-site-title="<?= $s['title'] ?>"
+                  data-group-name="<?= $s['group_name'] ?>">
+                  Reviews
+                </button>  
+
             <!--Review count en avg!-->
             <div class="stats">
               <span>
@@ -274,7 +282,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'add_r
                       data-my-score="<?= isset($s['my_score']) ? (int)$s['my_score'] : '' ?>"
                       data-my-comment="<?= htmlspecialchars($s['my_comment'] ?? '', ENT_QUOTES) ?>"
                     >
-                      Review
+                      Review schrijven
                     </button>
                 <?php else: ?>
   <span class="btnlink disabled" aria-disabled="true" title="Log eerst in">
@@ -283,7 +291,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'add_r
 <?php endif; ?>
 
                 <a class="btnlink primary" href="<?= $s['url']; ?>" target="_blank" rel="noopener noreferrer">Bekijk</a>
-                
+        
+<?php if (is_teacher()): ?>
+  <button class="btn sm primary"
+    type="button"
+    data-open-edit
+    data-site-id="<?= (int)$s['id'] ?>"
+    data-group-id="<?= (int)$s['group_id'] ?>"
+    data-group-name="<?= $s['group_name'] ?>"
+    data-title="<?= $s['title'] ?>"
+    data-url="<?= $s['url'] ?>">
+    Aanpassen
+  </button>
+<?php endif; ?>
             </div>
 
             </div>
@@ -346,8 +366,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'add_r
   </div>
 </div>
 
-<script src="assets/scripts/review.js" data-open="<?= $modalOpen ? '1' : '0' ?>"></script>
+  <!-- Reviews overlay -->
+<div class="modal" id="reviewsModal" hidden>
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-card panel">
+    <div class="modal-head">
+      <div>
+        <div class="title" id="reviewsTitle">Reviews</div>
+        <div class="muted" id="reviewsSub">—</div>
+      </div>
+      <button class="btn" type="button" data-close>Sluiten</button>
+    </div>
+
+    <div class="hr"></div>
+
+    <div id="reviewsBody" class="muted">Laden…</div>
+  </div>
+</div>
+
+
+
 
   </div>
+
+
+  <script src="assets/scripts/review.js" data-open="<?= $modalOpen ? '1' : '0' ?>"></script>
+  <script defer src="assets/scripts/site-reviews.js"></script>
+
 </body>
 </html>

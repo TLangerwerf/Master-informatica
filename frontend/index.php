@@ -175,6 +175,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'add_r
         <h1>Websites</h1>
         <div class="sub">Overzicht van ingezonden websites</div>
       </div>
+      <div class="menu">
+        <?php if ($user): ?>
+          <a href="my_group_reviews.php" class="btn primary">Mijn groepsfeedback</a>
+        <?php endif; ?>
+      </div>
 
       <!-- Login  -->
       <div class="auth">

@@ -5,6 +5,14 @@ session_start();
 require_once __DIR__ . '/../backend/auth.php';
 require_once __DIR__ . '/../backend/db.php';
 
+//Onhoud laatst gekozen klas//
+if (isset($_POST['class_id'])) {
+    $_SESSION['class_id'] = $_POST['class_id'];
+}
+
+$val = $_SESSION['class_id'] ?? '';
+
+
 if (!is_teacher()) {
   http_response_code(403);
   echo "403 - Alleen docenten hebben toegang.";
@@ -12,7 +20,6 @@ if (!is_teacher()) {
 }
 
 $pdo = db();
-
 $flashOk = '';
 $flashErr = '';
 

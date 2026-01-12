@@ -112,5 +112,11 @@ Om een duidelijk pakket van eisen op te kunnen stellen zijn onderstaande usersto
 ## SPRINT 1 MVP
 
 Wireframe leerlingen en Docenten.
-Userflows zijn geïnventariseerd.
+Userflows zijn geïnventariseerd.SQL_WRPd
 ERD is gemaakt op basis van de uit te voeren taken.
+
+## CSV importeren
+users_admin.php
+username,display_name,class_id,group_id
+j.jansen,Jan Jansen,1,3
+p.pieters,Piet Pieters,1,3
